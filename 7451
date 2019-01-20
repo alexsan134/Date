@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#222">
+  <title>Date</title>
+  
+  <!-- HTML -->
+  
+</head>
+<style>
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Roboto;
+  }
+  h1{
+    color:#777;
+    width:100%;
+    font-size:1.5em;
+    text-align:center ;
+    padding-bottom:10px;
+  }
+  body{
+    background:url(backs.jpg);
+    background-size:107%;
+  }
+  div{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 40px rgba(0, 0,0,.5);
+    width:85%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+  }
+  ul{
+    list-style:none;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin:10px 0 23px 0;
+  }
+  ul li{
+    transition:all 0.15s ease-in ;
+    width:47%;
+    text-align:center ;
+    padding:20px;
+    font-size:1em;
+    background:#e4717a;
+    border-radius:10px;
+    box-shadow:0 0 40px rgba(0,0, 0,.2);
+  }
+  ul li:nth-child(2){
+    background:#77dd77;
+  }
+  ul li a {
+    font-weight:bold ;
+    text-decoration:none;
+    color:#fff;
+  }
+  strong{
+    color:#888;
+  }
+  textarea{
+    width:125%;
+    margin-left:-12.5%;
+    height:180px;
+    padding:20px;
+    font-size:1.4em;
+    color:#555;
+    background:rgb(245, 245,245);
+    font-weight:bold;
+    border:none;
+    outline:none;
+    border-radius:10px ;
+    box-shadow:0 0 40px rgba(0,0,0,.2);
+    margin-top:10px;
+  }
+  #send{
+    color:#fff;
+    text-decoration:none;
+    background:#63a7eb;
+    text-align:center;
+    padding:15px;
+    width:100%;
+    border-radius:10px;
+    font-size:1.5em;
+    display:block;
+    margin-top:20px;
+    font-weight:bold;
+    box-shadow:0 0 40px rgba(0,0,0,.2);
+  }
+</style>
+<body>
+  <div>
+ <h1>¿Quieres ser mi novia?</h1>
+ <ul id="lists">
+   <li><a href="#">Nel prro</a></li>
+   <li><a href="#">Simios</a></li>
+ </ul>
+ <strong>Escribe un mensaje:</strong>
+ <textarea id="msg"></textarea>
+ <a href="#" id="send">Enviar respuesta</a>
+ </div>
+</body>
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+<script>
+  let li = document.querySelectorAll("#lists > li");
+  let sendBtn = document.getElementById("send");
+  let textResp = document.getElementById("msg");
+  let limit = 0;
+  let msg;
+  let resp = undefined;
+  li[0].addEventListener("click", () =>{
+    if(resp===undefined){
+    li[1].style.backgroundColor = "#999";
+    resp = "No prro";
+    } 
+  })
+  li[1].addEventListener("click", () =>{
+    if(resp===undefined){
+    li[0].style.backgroundColor = "#999";
+    resp = "Simios";
+    } 
+  })
+  sendBtn.addEventListener("click", () =>{
+    if(resp !== undefined){
+      limit++;
+      if(limit == 1){
+        msg = textResp.value;
+        Email.send({
+        Host : "smtp.elasticemail.com",
+        Username : "as62971@gmail.com",
+        Password : "Funcionde10",
+        To : 'as62971@gmail.com',
+        From : "as62971@gmail.com",
+        Subject : "Su respuesta fue",
+        Body : "Ella respondió: "+resp+" y su mensaje es: "+msg
+        }).then(
+        message => alert("Tu respuesta se ha enviado satisfactoriamente, wapa 😘", message)
+        );
+      }
+    }
+  })
+</script>
+</html>
